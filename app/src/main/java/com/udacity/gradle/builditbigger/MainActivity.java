@@ -50,12 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-
-        new EndpointsAsyncTask().execute();
-
-        Intent intent = new Intent(this, JokeAndroidActivity.class);
-        intent.putExtra("joke", joke);
-        startActivity(intent);
+        new EndpointsAsyncTask(this).execute();
     }
 
 

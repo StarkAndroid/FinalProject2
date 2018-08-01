@@ -7,7 +7,8 @@ import android.content.Context;
         import android.util.Pair;
         import android.widget.Toast;
 
-        import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.example.jokeandroidlibrary.JokeAndroidActivity;
+import com.google.api.client.extensions.android.http.AndroidHttp;
         import com.google.api.client.extensions.android.json.AndroidJsonFactory;
         import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
         import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
@@ -17,11 +18,17 @@ import android.content.Context;
 
 public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
+    Context context;
+
+    public EndpointsAsyncTask (Context context){
+        this.context = context.getApplicationContext();
+    }
 
     @Override
-    protected void onPostExecute(String s) {
-        MainActivity.setJoke(s);
-        super.onPostExecute(s);
+    protected void onPostExecute(String joke) {
+        Intent intent = new Intent(context, JokeAndroidActivity.class);
+        intent.putExtra("joke", joke);
+        context.startActivity(intent);
     }
 
     @Override
