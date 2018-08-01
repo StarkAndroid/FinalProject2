@@ -17,6 +17,13 @@ import android.content.Context;
 
 public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
+
+    @Override
+    protected void onPostExecute(String s) {
+        MainActivity.setJoke(s);
+        super.onPostExecute(s);
+    }
+
     @Override
     protected String doInBackground(Void... voids) {
         if(myApiService == null) {  // Only do this once

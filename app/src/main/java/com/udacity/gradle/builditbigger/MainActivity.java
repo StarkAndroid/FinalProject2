@@ -19,6 +19,12 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String joke;
+
+    public static void setJoke (String newJoke) {
+        joke = newJoke;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +50,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        String joke = "";
-        try {
-            joke = new EndpointsAsyncTask().execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
+        new EndpointsAsyncTask().execute();
+
         Intent intent = new Intent(this, JokeAndroidActivity.class);
         intent.putExtra("joke", joke);
         startActivity(intent);
